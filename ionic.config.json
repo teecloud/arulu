@@ -1,0 +1,7 @@
+{
+  "name": "arulu ",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
