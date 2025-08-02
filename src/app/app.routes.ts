@@ -3,8 +3,13 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/inbox',
+    redirectTo: 'home',
     pathMatch: 'full',
+  },
+   {
+    path: 'home',
+    loadComponent: () =>
+      import('./pages/home/home.page').then((h) => h.HomePage),
   },
   {
     path: 'folder/:id',

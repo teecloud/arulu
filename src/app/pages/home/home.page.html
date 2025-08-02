@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+      @if (currentUser) { <ion-buttons slot="end">
+      <ion-button (click)="logout()">Logout</ion-button>
+    </ion-buttons>}
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @if (!currentUser) {
+    <p>Please <a (click)="logout()">login</a> to view your requests.</p>
+  } @else {
+    <h2>Welcome, {{ currentUser.username }}!</h2>
+    <ion-button expand="block" (click)="newRequest()">New Service Request</ion-button>
+    <h3>Your Requests</h3>
+    <ion-list>
+      @for (req of requests; track req.id) {
+        <ion-item>
+          <ion-label>
+            <h2>{{ getServiceName(req.serviceTypeId) }}</h2>
+            <p>Date: {{ req.serviceDate | date:'short' }}</p>
+            <p>Status: {{ req.status }}</p>
+          </ion-label>
+        </ion-item>
+      } @empty {
+        <p>You have not made any requests yet.</p>
+      }
+    </ion-list>
+  }
+</ion-content>

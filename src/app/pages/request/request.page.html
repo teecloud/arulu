@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Service Request</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="!currentUser">
+    <p>Please log in to create a service request.</p>
+  </div>
+  <div *ngIf="currentUser">
+    <form (ngSubmit)="submit()">
+      <ion-list>
+        <ion-item>
+          <ion-label>Service</ion-label>
+          <ion-select [(ngModel)]="selectedServiceId" name="service" interface="action-sheet" placeholder="Select service">
+            <ion-select-option *ngFor="let s of services" [value]="s.id">{{ s.name }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Date</ion-label>
+          <ion-datetime display-format="MM/DD/YYYY HH:mm" [(ngModel)]="serviceDate" name="date" presentation="date-time"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Notes</ion-label>
+          <ion-textarea [(ngModel)]="notes" name="notes" placeholder="Any additional details"></ion-textarea>
+        </ion-item>
+      </ion-list>
+      <ion-text color="danger" *ngIf="errorMessage">{{ errorMessage }}</ion-text>
+      <ion-button expand="block" type="submit">Submit Request</ion-button>
+    </form>
+  </div>
+</ion-content>
